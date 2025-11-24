@@ -1,5 +1,27 @@
 # @mcp-use/inspector
 
+## 0.7.0-canary.3
+
+### Minor Changes
+
+- 018395c: Release canary
+
+### Patch Changes
+
+- Updated dependencies [018395c]
+  - mcp-use@1.5.0-canary.3
+
+## 0.7.0-canary.2
+
+### Minor Changes
+
+- 229a3a3: Added support for rpc messages logging in inspector
+
+### Patch Changes
+
+- Updated dependencies [229a3a3]
+  - mcp-use@1.5.0-canary.2
+
 ## 0.7.0-canary.1
 
 ### Minor Changes
