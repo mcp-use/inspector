@@ -1,5 +1,39 @@
 # @mcp-use/inspector
 
+## 0.11.0
+
+### Minor Changes
+
+- 4fc04a9: feat: added support for elicitation in inspector
+
+### Patch Changes
+
+- 4fc04a9: Updated dependencies.
+- 4fc04a9: fix: fix transport bug
+- Updated dependencies [4fc04a9]
+- Updated dependencies [4fc04a9]
+- Updated dependencies [4fc04a9]
+  - mcp-use@1.9.0
+
+## 0.11.0-canary.3
+
+### Patch Changes
+
+- b0d1ffe: fix: fix transport bug
+- Updated dependencies [b0d1ffe]
+  - mcp-use@1.9.0-canary.3
+
+## 0.11.0-canary.2
+
+### Minor Changes
+
+- b56c907: feat: added support for elicitation in inspector
+
+### Patch Changes
+
+- Updated dependencies [b56c907]
+  - mcp-use@1.9.0-canary.2
+
 ## 0.10.2-canary.1
 
 ### Patch Changes
