@@ -1,5 +1,27 @@
 # @mcp-use/inspector
 
+## 0.12.1-canary.2
+
+### Patch Changes
+
+- Updated dependencies [1b6562a]
+  - mcp-use@1.10.1-canary.2
+
+## 0.12.1-canary.1
+
+### Patch Changes
+
+- Updated dependencies [2bb2278]
+  - mcp-use@1.10.1-canary.1
+
+## 0.12.1-canary.0
+
+### Patch Changes
+
+- 122a36c: Added repository metadata in package.json
+- Updated dependencies [122a36c]
+  - mcp-use@1.10.1-canary.0
+
 ## 0.12.0
 
 ### Minor Changes
