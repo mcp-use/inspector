@@ -1,5 +1,27 @@
 # @mcp-use/inspector
 
+## 0.13.2-canary.0
+
+### Patch Changes
+
+- mcp-use@1.11.2-canary.0
+
+## 0.13.1
+
+### Patch Changes
+
+- abf0e0f: fix: widget props not picked up if zod
+- Updated dependencies [abf0e0f]
+  - mcp-use@1.11.1
+
+## 0.13.1-canary.0
+
+### Patch Changes
+
+- 6fc856c: fix: widget props not picked up if zod
+- Updated dependencies [6fc856c]
+  - mcp-use@1.11.1-canary.0
+
 ## 0.13.0
 
 ### Minor Changes
@@ -1082,7 +1104,7 @@
   ### Documentation
   - Fixed Supabase deployment script (`packages/mcp-use/examples/server/supabase/deploy.sh`) with updated project creation syntax
   - Updated deployment command in Supabase documentation to reflect new project creation syntax
-  - Added server inspection URL to Supabase deployment documentation (`docs/typescript/server/deployment-supabase.mdx`)
+  - Added server inspection URL to Supabase deployment documentation (`docs/typescript/server/deployment/supabase.mdx`)
 
   ### Other Fixes
   - Fixed history management to prevent unwanted redirects when running widgets in inspector dev-widget proxy
@@ -1367,7 +1389,7 @@
   ### Documentation
   - Fixed Supabase deployment script (`packages/mcp-use/examples/server/supabase/deploy.sh`) with updated project creation syntax
   - Updated deployment command in Supabase documentation to reflect new project creation syntax
-  - Added server inspection URL to Supabase deployment documentation (`docs/typescript/server/deployment-supabase.mdx`)
+  - Added server inspection URL to Supabase deployment documentation (`docs/typescript/server/deployment/supabase.mdx`)
 
   ### Other Fixes
   - Fixed history management to prevent unwanted redirects when running widgets in inspector dev-widget proxy
@@ -1576,7 +1598,7 @@
   ### Documentation
   - Fixed Supabase deployment script (`packages/mcp-use/examples/server/supabase/deploy.sh`) with updated project creation syntax
   - Updated deployment command in Supabase documentation to reflect new project creation syntax
-  - Added server inspection URL to Supabase deployment documentation (`docs/typescript/server/deployment-supabase.mdx`)
+  - Added server inspection URL to Supabase deployment documentation (`docs/typescript/server/deployment/supabase.mdx`)
 
   ### Other Fixes
   - Fixed history management to prevent unwanted redirects when running widgets in inspector dev-widget proxy
