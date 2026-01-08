@@ -1,5 +1,21 @@
 # @mcp-use/inspector
 
+## 0.14.1-canary.1
+
+### Patch Changes
+
+- mcp-use@1.12.1-canary.1
+
+## 0.14.1-canary.0
+
+### Patch Changes
+
+- 1674a02: Updated dependency `@modelcontextprotocol/sdk` to `^1.25.2`.
+- 1674a02: Updated dependency `@modelcontextprotocol/sdk` from `1.25.1` to `1.25.2`. This update includes a fix for ReDoS vulnerability in UriTemplate regex patterns.
+- Updated dependencies [1674a02]
+- Updated dependencies [1674a02]
+  - mcp-use@1.12.1-canary.0
+
 ## 0.14.0
 
 ### Minor Changes
