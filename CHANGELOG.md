@@ -1,5 +1,19 @@
 # @mcp-use/inspector
 
+## 0.16.1
+
+### Patch Changes
+
+- c64a2dd: fix(inspector): : fix inspector tool output full height
+  - mcp-use@1.14.1
+
+## 0.16.1-canary.0
+
+### Patch Changes
+
+- 7e87931: fix(inspector): : fix inspector tool output full height
+  - mcp-use@1.14.1-canary.0
+
 ## 0.16.0
 
 ### Minor Changes
