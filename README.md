@@ -324,14 +324,6 @@ All configuration is optional. The inspector works out of the box with sensible 
 | `PORT`     | 8080       | Port to run the inspector on |
 | `HOST`     | 0.0.0.0    | Host to bind to              |
 
-### Deploy to Railway
-
-Deploy instantly to Railway with automatic HTTPS and custom domains:
-
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template)
-
-For more deployment options and support, visit the [self-hosting documentation](https://mcp-use.com/docs/inspector/self-hosting).
-
 ---
 
 ## 📊 Telemetry & Privacy
