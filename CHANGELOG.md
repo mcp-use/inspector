@@ -1,5 +1,59 @@
 # @mcp-use/inspector
 
+## 0.16.2-canary.4
+
+### Patch Changes
+
+- Updated dependencies [f1171de]
+  - mcp-use@1.14.2-canary.4
+
+## 0.16.2-canary.3
+
+### Patch Changes
+
+- Updated dependencies [6ff396a]
+  - mcp-use@1.14.2-canary.3
+
+## 0.16.2-canary.2
+
+### Patch Changes
+
+- fb6a8f0: fix: improve widget rendering and session management
+  - Fix widget iframe reload by adding timestamp query parameter to force refresh when widget data changes
+  - Add retry logic with exponential backoff for dev widget fetching to handle Vite dev server cold starts
+  - Fix default session idle timeout from 5 minutes to 1 day to prevent premature session expiration
+  - Fix session lastAccessedAt tracking to update both persistent store and in-memory map
+  - Fix \_meta merging to preserve existing fields (e.g., openai/outputTemplate) when updating tools and widgets
+  - Add support for frame_domains and redirect_domains in widget CSP metadata
+
+- Updated dependencies [fb6a8f0]
+  - mcp-use@1.14.2-canary.2
+
+## 0.16.2-canary.1
+
+### Patch Changes
+
+- mcp-use@1.14.2-canary.1
+
+## 0.16.2-canary.0
+
+### Patch Changes
+
+- 3124ca9: fix(inspector): enhance widget security headers with frame domain support
+- 3124ca9: fix(inspector): standardize proxy configuration and enhance connection handling
+  - Renamed `customHeaders` to `headers` in `InspectorDashboard` and `ServerConnectionModal` for consistency.
+  - Removed unused state management for connecting servers in `InspectorDashboard`.
+  - Improved server connection handling by introducing a `handleReconnect` function to manage reconnection attempts.
+  - Updated UI elements to reflect connection states more accurately, including hover effects and error displays.
+  - Enhanced error handling for unauthorized connections, providing clearer user feedback.
+
+  These changes aim to streamline the connection management process and improve the overall user experience in the inspector interface.
+
+- 3124ca9: feat(inspector): enhance CustomHeadersEditor with focus management and title prop
+- Updated dependencies [3124ca9]
+- Updated dependencies [3124ca9]
+  - mcp-use@1.14.2-canary.0
+
 ## 0.16.1
 
 ### Patch Changes

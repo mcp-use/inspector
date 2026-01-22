@@ -140,14 +140,18 @@ function OpenAIComponentRendererBase({
         // Fetch the HTML resource client-side (where the connection exists)
         const resourceData = await currentReadResource(componentUrl);
 
-        // Extract CSP metadata from tool result
-        // Check both toolResult._meta (for tool calls) and toolResult.contents?.[0]?._meta (for resources)
+        // Extract CSP metadata - check tool result first, then resource (where appsSdkMetadata lives)
+        // The CSP is typically in the resource's _meta (set via appsSdkMetadata), not the tool result's _meta
         let widgetCSP = null;
-        const metaSource =
-          currentToolResult?._meta || currentToolResult?.contents?.[0]?._meta;
-        if (metaSource?.["openai/widgetCSP"]) {
-          widgetCSP = metaSource["openai/widgetCSP"];
+        if (currentToolResult?._meta?.["openai/widgetCSP"]) {
+          widgetCSP = currentToolResult._meta["openai/widgetCSP"];
+        } else if (resourceData?.contents?.[0]?._meta?.["openai/widgetCSP"]) {
+          widgetCSP = resourceData.contents[0]._meta["openai/widgetCSP"];
         }
+
+        // For other metadata, prefer tool result's _meta as it may have tool-specific overrides
+        const metaSource =
+          currentToolResult?._meta || resourceData?.contents?.[0]?._meta;
 
         // Extract widget props from _meta["mcp-use/props"]
         const widgetProps = metaSource?.["mcp-use/props"] || null;
@@ -249,11 +253,13 @@ function OpenAIComponentRendererBase({
 
         if (computedUseDevMode && widgetName && currentServerBaseUrl) {
           // Use proxy URL for dev widgets (same-origin, supports HMR)
-          const proxyUrl = `/inspector/api/dev-widget/${toolId}`;
+          // Add timestamp to force iframe reload when widget data changes (e.g., props)
+          const proxyUrl = `/inspector/api/dev-widget/${toolId}?t=${Date.now()}`;
           setWidgetUrl(proxyUrl);
           setIsSameOrigin(true); // Proxy makes it same-origin
         } else {
-          const prodUrl = `/inspector/api/resources/widget/${toolId}`;
+          // Add timestamp to force iframe reload when widget data changes (e.g., props)
+          const prodUrl = `/inspector/api/resources/widget/${toolId}?t=${Date.now()}`;
           setWidgetUrl(prodUrl);
           // Relative URLs are always same-origin
           setIsSameOrigin(true);
