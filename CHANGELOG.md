@@ -1,5 +1,19 @@
 # @mcp-use/inspector
 
+## 0.17.3-canary.1
+
+### Patch Changes
+
+- 10cdce9: fix: enable dark mode through theme url param
+  - mcp-use@1.15.3-canary.1
+
+## 0.17.3-canary.0
+
+### Patch Changes
+
+- Updated dependencies [013101d]
+  - mcp-use@1.15.3-canary.0
+
 ## 0.17.2
 
 ### Patch Changes
