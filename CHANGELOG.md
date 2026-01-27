@@ -1,5 +1,103 @@
 # @mcp-use/inspector
 
+## 0.17.3-canary.0
+
+### Patch Changes
+
+- Updated dependencies [013101d]
+  - mcp-use@1.15.3-canary.0
+
+## 0.17.2
+
+### Patch Changes
+
+- bb28a69: Fix HMR file watcher exhausting inotify limits by properly ignoring node_modules
+
+  The HMR file watcher was attempting to watch files inside `node_modules/` despite having ignore patterns configured, which exhausted the inotify watch limit (ENOSPC errors) in containerized environments.
+
+- Updated dependencies [bb28a69]
+  - mcp-use@1.15.2
+
+## 0.17.2-canary.1
+
+### Patch Changes
+
+- 4d3e62e: fix(cli): fix hmr
+- Updated dependencies [4d3e62e]
+  - mcp-use@1.15.2-canary.1
+
+## 0.17.2-canary.0
+
+### Patch Changes
+
+- mcp-use@1.15.2-canary.0
+
+## 0.17.1
+
+### Patch Changes
+
+- mcp-use@1.15.1
+
+## 0.17.1-canary.0
+
+### Patch Changes
+
+- mcp-use@1.15.1-canary.0
+
+## 0.17.0
+
+### Minor Changes
+
+- 1dcba40: feat: add MCP Apps support with dual-protocol widget rendering
+  - Add dual-protocol support enabling widgets to work with both MCP Apps and ChatGPT Apps SDK
+  - Add MCPAppsRenderer and MCPAppsDebugControls components for advanced debugging and visualization
+  - Add sandboxed iframe support with console logging and safe area insets for isolated widget rendering
+  - Add widget adapters (MCP Apps, Apps SDK) with protocol helpers for seamless cross-protocol compatibility
+  - Add browser host normalization for server connections in CLI
+  - Fix Zod JIT compilation to prevent CSP violations in sandboxed environments
+  - Add MCP Apps documentation and example server
+
+  feat: add HTML landing page for MCP server endpoints
+  - Add `generateLandingPage()` function that generates styled HTML landing pages for browser GET requests
+  - Include connection instructions for Claude Code, Cursor, VS Code, VS Code Insiders, and ChatGPT
+
+### Patch Changes
+
+- 1dcba40: fix: mcp server landing now shows the external url instead of the internal
+- 1dcba40: chore: trigger canary release
+- 1dcba40: fix docs
+- 1dcba40: chore: fix vulnerabilities in deps
+- Updated dependencies [1dcba40]
+- Updated dependencies [1dcba40]
+- Updated dependencies [1dcba40]
+- Updated dependencies [1dcba40]
+- Updated dependencies [1dcba40]
+  - mcp-use@1.15.0
+
+## 0.17.0-canary.4
+
+### Patch Changes
+
+- a078aa9: fix: mcp server landing now shows the external url instead of the internal
+- Updated dependencies [a078aa9]
+  - mcp-use@1.15.0-canary.4
+
+## 0.17.0-canary.3
+
+### Patch Changes
+
+- e910f64: chore: fix vulnerabilities in deps
+- Updated dependencies [e910f64]
+  - mcp-use@1.15.0-canary.3
+
+## 0.17.0-canary.2
+
+### Patch Changes
+
+- e4ca98e: chore: trigger canary release
+- Updated dependencies [e4ca98e]
+  - mcp-use@1.15.0-canary.2
+
 ## 0.17.0-canary.1
 
 ### Patch Changes
