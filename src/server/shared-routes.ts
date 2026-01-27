@@ -11,6 +11,7 @@ import {
   storeWidgetData,
 } from "./shared-utils-browser.js";
 import { formatErrorResponse } from "./utils.js";
+import { registerMcpAppsRoutes } from "./routes/mcp-apps.js";
 
 // WebSocket proxy for Vite HMR - note: requires WebSocket library
 // For now, this is a placeholder that will be implemented when WebSocket support is added
@@ -115,6 +116,10 @@ export function registerInspectorRoutes(
     basePath: "/inspector/api/oauth",
     enableLogging: true,
   });
+
+  // Mount MCP Apps routes at /inspector/api/mcp-apps
+  // Note: registerMcpAppsRoutes handles the /inspector/api/mcp-apps prefix internally
+  registerMcpAppsRoutes(app);
 
   // Chat API endpoint - handles MCP agent chat with custom LLM key (streaming)
   app.post("/inspector/api/chat/stream", async (c) => {
@@ -274,11 +279,13 @@ export function registerInspectorRoutes(
       let html = await response.text();
 
       // Create a modified widgetData with the fetched HTML as resourceData
+      // IMPORTANT: Preserve devServerBaseUrl for window.__mcpPublicUrl injection
       const modifiedWidgetData = {
         ...widgetData,
         resourceData: {
           contents: [{ text: html }],
         },
+        devServerBaseUrl: widgetData.devServerBaseUrl,
       };
 
       // Inject OpenAI wrapper using existing logic

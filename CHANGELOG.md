@@ -1,5 +1,59 @@
 # @mcp-use/inspector
 
+## 0.17.0-canary.4
+
+### Patch Changes
+
+- a078aa9: fix: mcp server landing now shows the external url instead of the internal
+- Updated dependencies [a078aa9]
+  - mcp-use@1.15.0-canary.4
+
+## 0.17.0-canary.3
+
+### Patch Changes
+
+- e910f64: chore: fix vulnerabilities in deps
+- Updated dependencies [e910f64]
+  - mcp-use@1.15.0-canary.3
+
+## 0.17.0-canary.2
+
+### Patch Changes
+
+- e4ca98e: chore: trigger canary release
+- Updated dependencies [e4ca98e]
+  - mcp-use@1.15.0-canary.2
+
+## 0.17.0-canary.1
+
+### Patch Changes
+
+- 08d3b3a: fix docs
+- Updated dependencies [08d3b3a]
+  - mcp-use@1.15.0-canary.1
+
+## 0.17.0-canary.0
+
+### Minor Changes
+
+- 93fd6f4: feat: add MCP Apps support with dual-protocol widget rendering
+  - Add dual-protocol support enabling widgets to work with both MCP Apps and ChatGPT Apps SDK
+  - Add MCPAppsRenderer and MCPAppsDebugControls components for advanced debugging and visualization
+  - Add sandboxed iframe support with console logging and safe area insets for isolated widget rendering
+  - Add widget adapters (MCP Apps, Apps SDK) with protocol helpers for seamless cross-protocol compatibility
+  - Add browser host normalization for server connections in CLI
+  - Fix Zod JIT compilation to prevent CSP violations in sandboxed environments
+  - Add MCP Apps documentation and example server
+
+  feat: add HTML landing page for MCP server endpoints
+  - Add `generateLandingPage()` function that generates styled HTML landing pages for browser GET requests
+  - Include connection instructions for Claude Code, Cursor, VS Code, VS Code Insiders, and ChatGPT
+
+### Patch Changes
+
+- Updated dependencies [93fd6f4]
+  - mcp-use@1.15.0-canary.0
+
 ## 0.16.2
 
 ### Patch Changes
