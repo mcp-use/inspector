@@ -1,5 +1,22 @@
 # @mcp-use/inspector
 
+## 0.18.0-canary.1
+
+### Patch Changes
+
+- Updated dependencies [9b9f371]
+  - mcp-use@1.16.0-canary.1
+
+## 0.18.0-canary.0
+
+### Minor Changes
+
+- 144ad6a: Add prompts in Chat: type / to open a prompt, run it, and include its result in the thread before sending (prompts with args are not supported).
+
+### Patch Changes
+
+- mcp-use@1.15.4-canary.0
+
 ## 0.17.3
 
 ### Patch Changes
