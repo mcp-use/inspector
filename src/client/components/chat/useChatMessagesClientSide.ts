@@ -163,11 +163,11 @@ export function useChatMessagesClientSide({
         }
 
         // Stream events from agent
-        // Don't include the new userMessage here - streamEvents() appends it internally
-        // as new HumanMessage(query), so including it would cause duplication
+        // Include the new user message with attachments in the external history
         const externalHistory = convertMessagesToLangChain([
           ...messages,
           ...promptResultsMessages,
+          userMessage, // Include the new message with attachments
         ]);
 
         for await (const event of agentRef.current.streamEvents(

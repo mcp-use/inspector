@@ -183,55 +183,25 @@ export async function* handleChatRequestStream(requestBody: {
     llm,
     client,
     maxSteps: 10,
-    memoryEnabled: false, // Use externalHistory instead
+    memoryEnabled: true,
     systemPrompt:
       "You are a helpful assistant with access to MCP tools, prompts, and resources. Help users interact with the MCP server.",
   });
 
-  // Import LangChain message types for history conversion
-  const { HumanMessage, AIMessage } = await import("@langchain/core/messages");
+  // Format messages - use only the last user message as the query
+  const lastUserMessage = messages
+    .filter((msg: any) => msg.role === "user")
+    .pop();
 
-  // Extract last user message as the query, and build history from all prior messages
-  const lastUserMessageIndex = messages
-    .map((msg: any, i: number) => ({ msg, i }))
-    .filter(({ msg }: any) => msg.role === "user")
-    .pop()?.i;
-
-  if (lastUserMessageIndex === undefined) {
+  if (!lastUserMessage) {
     throw new Error("No user message found");
   }
 
-  const lastUserMessage = messages[lastUserMessageIndex];
-  const priorMessages = messages.slice(0, lastUserMessageIndex);
-
-  // Convert prior messages to LangChain format as externalHistory
-  const externalHistory = priorMessages.map((msg: any) => {
-    if (msg.role === "user") {
-      if (msg.attachments && msg.attachments.length > 0) {
-        const content: Array<any> = [
-          { type: "text", text: msg.content || "[no content]" },
-        ];
-        for (const attachment of msg.attachments) {
-          if (attachment.type === "image") {
-            content.push({
-              type: "image_url",
-              image_url: {
-                url: `data:${attachment.mimeType};base64,${attachment.data}`,
-              },
-            });
-          }
-        }
-        return new HumanMessage({ content });
-      }
-      return new HumanMessage(msg.content || "[no content]");
-    }
-    return new AIMessage(msg.content || "[no content]");
-  });
-
-  // Convert last user message to LangChain format (supporting multimodal)
+  // Convert message to LangChain format (supporting multimodal)
   let messageInput: any;
   if (lastUserMessage.attachments && lastUserMessage.attachments.length > 0) {
     // Multimodal message with attachments
+    const { HumanMessage } = await import("@langchain/core/messages");
     const content: Array<any> = [
       {
         type: "text",
@@ -264,13 +234,8 @@ export async function* handleChatRequestStream(requestBody: {
     // Send initial assistant message event (AI SDK format)
     yield `data: ${JSON.stringify({ type: "message", id: messageId, role: "assistant" })}\n\n`;
 
-    // Use streamEvents to get real-time updates, passing conversation history
-    for await (const event of agent.streamEvents(
-      messageInput,
-      10,
-      true,
-      externalHistory
-    )) {
+    // Use streamEvents to get real-time updates
+    for await (const event of agent.streamEvents(messageInput)) {
       // Emit text content as it streams
       if (event.event === "on_chat_model_stream" && event.data?.chunk?.text) {
         const text = event.data.chunk.text;
@@ -445,55 +410,25 @@ export async function handleChatRequest(requestBody: {
     llm,
     client,
     maxSteps: 10,
-    memoryEnabled: false, // Use externalHistory instead
+    memoryEnabled: true,
     systemPrompt:
       "You are a helpful assistant with access to MCP tools, prompts, and resources. Help users interact with the MCP server.",
   });
 
-  // Import LangChain message types for history conversion
-  const { HumanMessage, AIMessage } = await import("@langchain/core/messages");
+  // Format messages - use only the last user message as the query
+  const lastUserMessage = messages
+    .filter((msg: any) => msg.role === "user")
+    .pop();
 
-  // Extract last user message as the query, and build history from all prior messages
-  const lastUserMessageIndex = messages
-    .map((msg: any, i: number) => ({ msg, i }))
-    .filter(({ msg }: any) => msg.role === "user")
-    .pop()?.i;
-
-  if (lastUserMessageIndex === undefined) {
+  if (!lastUserMessage) {
     throw new Error("No user message found");
   }
 
-  const lastUserMessage = messages[lastUserMessageIndex];
-  const priorMessages = messages.slice(0, lastUserMessageIndex);
-
-  // Convert prior messages to LangChain format as externalHistory
-  const externalHistory = priorMessages.map((msg: any) => {
-    if (msg.role === "user") {
-      if (msg.attachments && msg.attachments.length > 0) {
-        const content: Array<any> = [
-          { type: "text", text: msg.content || "[no content]" },
-        ];
-        for (const attachment of msg.attachments) {
-          if (attachment.type === "image") {
-            content.push({
-              type: "image_url",
-              image_url: {
-                url: `data:${attachment.mimeType};base64,${attachment.data}`,
-              },
-            });
-          }
-        }
-        return new HumanMessage({ content });
-      }
-      return new HumanMessage(msg.content || "[no content]");
-    }
-    return new AIMessage(msg.content || "[no content]");
-  });
-
-  // Convert last user message to LangChain format (supporting multimodal)
+  // Convert message to LangChain format (supporting multimodal)
   let messageInput: any;
   if (lastUserMessage.attachments && lastUserMessage.attachments.length > 0) {
     // Multimodal message with attachments
+    const { HumanMessage } = await import("@langchain/core/messages");
     const content: Array<any> = [
       {
         type: "text",
@@ -519,8 +454,8 @@ export async function handleChatRequest(requestBody: {
     messageInput = lastUserMessage.content;
   }
 
-  // Get response from agent, passing conversation history
-  const response = await agent.run(messageInput, 10, true, externalHistory);
+  // Get response from agent
+  const response = await agent.run(messageInput);
 
   // Clean up
   await client.closeAllSessions();
