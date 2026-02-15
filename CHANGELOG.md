@@ -1,5 +1,37 @@
 # @mcp-use/inspector
 
+## 0.18.10-canary.1
+
+### Patch Changes
+
+- Updated dependencies [52cd2a8]
+  - mcp-use@1.18.0-canary.1
+
+## 0.18.10-canary.0
+
+### Patch Changes
+
+- Updated dependencies [c3a452a]
+  - mcp-use@1.18.0-canary.0
+
+## 0.18.9
+
+### Patch Changes
+
+- 32b19dc: fix(logs): reduces the amount of noisy logs in the dev server
+- Updated dependencies [32b19dc]
+- Updated dependencies [32b19dc]
+  - mcp-use@1.17.4
+
+## 0.18.9-canary.0
+
+### Patch Changes
+
+- 4a118cc: fix(logs): reduces the amount of noisy logs in the dev server
+- Updated dependencies [4a118cc]
+- Updated dependencies [4a118cc]
+  - mcp-use@1.17.4-canary.0
+
 ## 0.18.8
 
 ### Patch Changes
