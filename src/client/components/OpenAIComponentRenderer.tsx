@@ -2,6 +2,7 @@ import { cn } from "@/client/lib/utils";
 import { X } from "lucide-react";
 import { useMcpClient } from "mcp-use/react";
 import { memo, useCallback, useEffect, useRef, useState } from "react";
+import { MCP_APPS_CONFIG } from "../constants/mcp-apps";
 import { IFRAME_SANDBOX_PERMISSIONS } from "../constants/iframe";
 import { useTheme } from "../context/ThemeContext";
 import { useWidgetDebug } from "../context/WidgetDebugContext";
@@ -105,6 +106,8 @@ function OpenAIComponentRendererBase({
   > | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isReady, setIsReady] = useState(false);
+  const [showSkeleton, setShowSkeleton] = useState(true);
+  const hasLoadedOnceRef = useRef(false);
   const [error, setError] = useState<string | null>(null);
   const [widgetUrl, setWidgetUrl] = useState<string | null>(null);
 
@@ -347,11 +350,11 @@ function OpenAIComponentRendererBase({
     serverId,
     toolId,
     customProps,
-    // Re-run when toolArgs or toolResult materially change (e.g., from empty
-    // to populated when streaming tool-call → tool-result arrives).
+    // Re-run when toolArgs materially change (e.g., from empty to populated when streaming).
     // Serialized to avoid re-runs from object reference changes.
     JSON.stringify(toolArgs),
-    JSON.stringify(toolResult?._meta),
+    // Note: toolResult._meta is intentionally excluded - it's updated dynamically
+    // via updateIframeGlobals() (see effect at line ~504) without reloading the widget.
     // Note: readResource, serverBaseUrl, playground are intentionally excluded.
     // resolvedTheme and playground are captured at mount time for initialization,
     // then updated dynamically via updateIframeGlobals() without reloading the widget.
@@ -402,6 +405,9 @@ function OpenAIComponentRendererBase({
             htmlElement.setAttribute("data-theme", updates.theme);
             // Also set inline style as fallback
             htmlElement.style.colorScheme = updates.theme;
+            // Add theme as a class for Tailwind dark mode (class-based strategy)
+            htmlElement.classList.remove("light", "dark");
+            htmlElement.classList.add(updates.theme);
           }
 
           if (iframeWindow.openai) {
@@ -555,7 +561,11 @@ function OpenAIComponentRendererBase({
     if (!widgetUrl) return;
 
     // Reset readiness whenever we load a new widget URL.
+    // Only show skeleton on first load, not on prop updates
     setIsReady(false);
+    if (!hasLoadedOnceRef.current) {
+      setShowSkeleton(true);
+    }
     setError(null);
 
     let hasHandledLoad = false;
@@ -573,6 +583,40 @@ function OpenAIComponentRendererBase({
 
       // Let console log messages pass through (handled by useIframeConsole hook)
       if (event.data?.type === "iframe-console-log") {
+        const isErrorLevel = event.data.level === "error";
+        if (isErrorLevel) {
+          const args = Array.isArray(event.data.args) ? event.data.args : [];
+          const first = args[0];
+          const extractedMessage =
+            typeof first === "string"
+              ? first
+              : typeof first?.message === "string"
+                ? first.message
+                : "Widget runtime error";
+          const extractedStack =
+            typeof first?.error?.stack === "string"
+              ? first.error.stack
+              : typeof first?.stack === "string"
+                ? first.stack
+                : undefined;
+          if (typeof window !== "undefined" && window.parent !== window) {
+            window.parent.postMessage(
+              {
+                type: "mcp-inspector:widget:error",
+                source: "iframe-console:error",
+                message: extractedMessage,
+                stack: extractedStack,
+                timestamp: Date.now(),
+                url:
+                  typeof event.data.url === "string"
+                    ? event.data.url
+                    : undefined,
+                toolId,
+              },
+              "*"
+            );
+          }
+        }
         return;
       }
 
@@ -881,11 +925,32 @@ function OpenAIComponentRendererBase({
       htmlElement.setAttribute("data-theme", resolvedTheme);
       // Also set inline style as fallback
       htmlElement.style.colorScheme = resolvedTheme;
+      // Add theme as a class for Tailwind dark mode (class-based strategy)
+      htmlElement.classList.remove("light", "dark");
+      htmlElement.classList.add(resolvedTheme);
     } catch {
       // Cross-origin access denied — fall through to postMessage
     }
     updateIframeGlobals({ theme: resolvedTheme });
   }, [resolvedTheme, isReady, isSameOrigin, updateIframeGlobals]);
+
+  // Hide skeleton after iframe loads + brief delay for widget to render
+  useEffect(() => {
+    if (!isReady || !showSkeleton) {
+      return;
+    }
+
+    // Give the widget 300ms to render after iframe loads
+    // This handles cold Vite starts without requiring widget code changes
+    const timer = setTimeout(() => {
+      setShowSkeleton(false);
+      hasLoadedOnceRef.current = true;
+    }, 300);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isReady, showSkeleton]);
 
   // Dynamically resize iframe height to its content, capped at 100vh
   // Only works for same-origin iframes; cross-origin iframes rely on
@@ -1010,8 +1075,8 @@ function OpenAIComponentRendererBase({
 
   return (
     <Wrapper className={className} noWrapper={noWrapper}>
-      {!isReady && (
-        <div className="flex absolute left-0 top-0 items-center justify-center w-full h-full">
+      {showSkeleton && (
+        <div className="flex absolute left-0 top-0 items-center justify-center w-full h-full z-0">
           <Spinner className="size-5" />
         </div>
       )}
@@ -1020,7 +1085,7 @@ function OpenAIComponentRendererBase({
         isSameOrigin &&
         displayMode !== "fullscreen" &&
         displayMode !== "pip" && (
-          <div className="absolute top-2 right-2 z-10 flex items-center gap-2">
+          <div className="absolute top-2 right-2 z-20 flex items-center gap-2">
             {/* Use advanced debug controls for Apps SDK (same as MCP Apps) */}
             <MCPAppsDebugControls
               displayMode={displayMode}
@@ -1045,8 +1110,13 @@ function OpenAIComponentRendererBase({
           centerVertically && "items-center",
           displayMode === "fullscreen" && "bg-background",
           displayMode === "pip" &&
-            "fixed top-4 left-1/2 -translate-x-1/2 z-50 rounded-3xl w-fit min-w-[300px] max-w-[min(90vw,1200px)] h-[400px] shadow-2xl border overflow-hidden"
+            `fixed top-4 left-1/2 -translate-x-1/2 z-50 rounded-3xl w-full min-w-[300px] h-[400px] shadow-2xl border overflow-hidden`
         )}
+        style={
+          displayMode === "pip"
+            ? { maxWidth: MCP_APPS_CONFIG.DIMENSIONS.PIP_MAX_WIDTH }
+            : undefined
+        }
         onMouseEnter={() => displayMode === "pip" && setIsPipHovered(true)}
         onMouseLeave={() => displayMode === "pip" && setIsPipHovered(false)}
       >
@@ -1079,7 +1149,7 @@ function OpenAIComponentRendererBase({
 
         <div
           className={cn(
-            "flex-1 w-full flex justify-center items-center",
+            "flex-1 w-full flex justify-center items-center relative z-10",
             displayMode === "fullscreen" && "pt-14",
             centerVertically && "items-center"
           )}

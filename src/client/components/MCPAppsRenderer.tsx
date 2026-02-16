@@ -41,6 +41,7 @@ import { cn } from "../lib/utils";
 import { FullscreenNavbar } from "./FullscreenNavbar";
 import type { SandboxedIframeHandle } from "./ui/SandboxedIframe";
 import { SandboxedIframe } from "./ui/SandboxedIframe";
+import { Spinner } from "./ui/spinner";
 import { WidgetWrapper } from "./ui/WidgetWrapper";
 
 type DisplayMode = "inline" | "pip" | "fullscreen";
@@ -101,9 +102,12 @@ export function MCPAppsRenderer({
     setWidgetModelContext,
   } = useWidgetDebug();
 
-  const [isReady, setIsReady] = useState(false);
+  const [initCount, setInitCount] = useState(0);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [widgetHtml, setWidgetHtml] = useState<string | null>(null);
+  const [isReady, setIsReady] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(true);
+  const hasLoadedOnceRef = useRef(false);
   const [widgetCsp, setWidgetCsp] = useState<any>(undefined);
   const [widgetPermissions, setWidgetPermissions] = useState<any>(undefined);
   const [prefersBorder, setPrefersBorder] = useState<boolean>(true);
@@ -251,6 +255,10 @@ export function MCPAppsRenderer({
         }
 
         setWidgetHtml(html);
+        setIsReady(false);
+        if (!hasLoadedOnceRef.current) {
+          setShowSpinner(true);
+        }
         setWidgetCsp(csp);
         setWidgetPermissions(permissions);
         setPrefersBorder(mcpAppsPrefersBorder);
@@ -282,7 +290,7 @@ export function MCPAppsRenderer({
     const iframe = sandboxRef.current.getIframeElement();
     if (!iframe?.contentWindow) return;
 
-    setIsReady(false);
+    setInitCount(0);
 
     // Create a custom transport that posts messages through the SandboxedIframe
     // The SandboxedIframe will relay them to the correct nested iframe
@@ -330,7 +338,7 @@ export function MCPAppsRenderer({
     // Register bridge handlers
     bridge.oninitialized = () => {
       console.log("[MCPAppsRenderer] Widget initialized");
-      setIsReady(true);
+      setInitCount((c) => c + 1);
     };
 
     bridge.onmessage = async ({ content }) => {
@@ -402,6 +410,34 @@ export function MCPAppsRenderer({
         timestamp: new Date().toISOString(),
         url: resourceUri,
       });
+      if (
+        level === "error" &&
+        typeof window !== "undefined" &&
+        window.parent !== window
+      ) {
+        const message =
+          typeof data === "string"
+            ? data
+            : typeof (data as { message?: unknown })?.message === "string"
+              ? String((data as { message: string }).message)
+              : "MCP Apps runtime error";
+        const stack =
+          typeof (data as { stack?: unknown })?.stack === "string"
+            ? String((data as { stack: string }).stack)
+            : undefined;
+        window.parent.postMessage(
+          {
+            type: "mcp-inspector:widget:error",
+            source: "mcp-apps:logging",
+            message,
+            stack,
+            timestamp: Date.now(),
+            toolId: toolCallId,
+            url: resourceUri,
+          },
+          "*"
+        );
+      }
       return {};
     };
 
@@ -461,6 +497,45 @@ export function MCPAppsRenderer({
       if (event.origin !== proxyOrigin) return;
       if (event.source !== iframe.contentWindow) return;
 
+      if (event.data?.type === "iframe-console-log") {
+        if (
+          event.data.level === "error" &&
+          typeof window !== "undefined" &&
+          window.parent !== window
+        ) {
+          const args = Array.isArray(event.data.args) ? event.data.args : [];
+          const first = args[0];
+          const message =
+            typeof first === "string"
+              ? first
+              : typeof first?.message === "string"
+                ? first.message
+                : "MCP Apps iframe runtime error";
+          const stack =
+            typeof first?.error?.stack === "string"
+              ? first.error.stack
+              : typeof first?.stack === "string"
+                ? first.stack
+                : undefined;
+          window.parent.postMessage(
+            {
+              type: "mcp-inspector:widget:error",
+              source: "mcp-apps:iframe-console:error",
+              message,
+              stack,
+              timestamp: Date.now(),
+              toolId: toolCallId,
+              url:
+                typeof event.data.url === "string"
+                  ? event.data.url
+                  : resourceUri,
+            },
+            "*"
+          );
+        }
+        return;
+      }
+
       // Log received message
       rpcLogBus.publish({
         serverId: `widget-${toolCallId}`,
@@ -506,19 +581,19 @@ export function MCPAppsRenderer({
   // Update host context when it changes
   useEffect(() => {
     const bridge = bridgeRef.current;
-    if (!bridge || !isReady) return;
+    if (!bridge || initCount === 0) return;
     console.log("[MCPAppsRenderer] setHostContext called with:", hostContext);
     bridge.setHostContext(hostContext);
-  }, [hostContext, isReady]);
+  }, [hostContext, initCount]);
 
   // Send partial/streaming tool input when available
   // This must be defined BEFORE the sendToolInput effect so it fires first
   useEffect(() => {
     const bridge = bridgeRef.current;
-    if (!bridge || !isReady || !partialToolInput) return;
+    if (!bridge || initCount === 0 || !partialToolInput) return;
 
     bridge.sendToolInputPartial({ arguments: partialToolInput });
-  }, [isReady, partialToolInput]);
+  }, [initCount, partialToolInput]);
 
   // Send tool input when ready
   // Also resend when toolCallId changes (indicates re-execution)
@@ -527,7 +602,7 @@ export function MCPAppsRenderer({
   // the partial first and show the streaming state
   useEffect(() => {
     const bridge = bridgeRef.current;
-    if (!bridge || !isReady) return;
+    if (!bridge || initCount === 0) return;
 
     // Merge customProps with toolInput
     const mergedArgs = {
@@ -546,20 +621,20 @@ export function MCPAppsRenderer({
     } else {
       bridge.sendToolInput({ arguments: mergedArgs });
     }
-  }, [isReady, toolInput, customProps, toolCallId, partialToolInput]);
+  }, [initCount, toolInput, customProps, toolCallId, partialToolInput]);
 
   // Send tool output when ready
   // Allow sending null to reset widget to pending state (Issue #930)
   useEffect(() => {
     const bridge = bridgeRef.current;
-    if (!bridge || !isReady) return;
+    if (!bridge || initCount === 0) return;
 
     // Send toolOutput even if null (allows widget to show pending state on re-execution)
     if (toolOutput) {
       bridge.sendToolResult(toolOutput as CallToolResult);
     }
     // Note: When toolOutput is null, widget stays in pending state (isPending=true)
-  }, [isReady, toolOutput, toolCallId]);
+  }, [initCount, toolOutput, toolCallId]);
 
   // Handle CSP violations
   const handleSandboxMessage = useCallback(
@@ -645,6 +720,18 @@ export function MCPAppsRenderer({
     [onDisplayModeChange]
   );
 
+  // Hide spinner after iframe loads + brief delay for widget to render (first load only)
+  useEffect(() => {
+    if (!isReady || !showSpinner) return;
+
+    const timer = setTimeout(() => {
+      setShowSpinner(false);
+      hasLoadedOnceRef.current = true;
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [isReady, showSpinner]);
+
   // Loading states
   if (loadError) {
     return (
@@ -661,8 +748,8 @@ export function MCPAppsRenderer({
   if (!widgetHtml) {
     return (
       <WidgetWrapper className={className} noWrapper={noWrapper}>
-        <div className="border border-zinc-200 dark:border-zinc-700 rounded-lg p-4 text-center text-sm text-zinc-500 dark:text-zinc-400">
-          Preparing MCP App widget...
+        <div className="flex absolute left-0 top-0 items-center justify-center w-full h-full">
+          <Spinner className="size-5" />
         </div>
       </WidgetWrapper>
     );
@@ -678,7 +765,7 @@ export function MCPAppsRenderer({
 
     if (isPip) {
       return [
-        `fixed top-4 left-1/2 -translate-x-1/2 z-50 rounded-3xl w-fit min-w-[300px] max-w-[min(90vw,1200px)] h-[${MCP_APPS_CONFIG.DIMENSIONS.PIP_HEIGHT}px]`,
+        `fixed top-4 left-1/2 -translate-x-1/2 z-50 rounded-3xl w-full min-w-[300px] h-[400px]`,
         "shadow-2xl border overflow-hidden",
         "bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80",
       ].join(" ");
@@ -702,7 +789,15 @@ export function MCPAppsRenderer({
 
   return (
     <WidgetWrapper className={className} noWrapper={noWrapper}>
-      <div ref={containerRef} className={containerClassName}>
+      <div
+        ref={containerRef}
+        className={containerClassName}
+        style={
+          isPip
+            ? { maxWidth: MCP_APPS_CONFIG.DIMENSIONS.PIP_MAX_WIDTH }
+            : undefined
+        }
+      >
         {isFullscreen && (
           <FullscreenNavbar
             title={toolName}
@@ -726,10 +821,15 @@ export function MCPAppsRenderer({
         {/* Main content with centering like Apps SDK */}
         <div
           className={cn(
-            "flex-1 w-full flex justify-center items-center",
+            "flex-1 w-full h-full flex justify-center items-center relative",
             isFullscreen && "pt-14"
           )}
         >
+          {showSpinner && (
+            <div className="flex absolute left-0 top-0 items-center justify-center w-full h-full z-10">
+              <Spinner className="size-5" />
+            </div>
+          )}
           <SandboxedIframe
             ref={sandboxRef}
             html={widgetHtml}
@@ -737,6 +837,7 @@ export function MCPAppsRenderer({
             csp={widgetCsp}
             permissions={widgetPermissions}
             permissive={cspMode === "permissive"}
+            onLoad={() => setIsReady(true)}
             onMessage={handleSandboxMessage}
             title={`MCP App: ${toolName}`}
             className={cn(

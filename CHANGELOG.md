@@ -1,5 +1,98 @@
 # @mcp-use/inspector
 
+## 0.20.0-canary.6
+
+### Patch Changes
+
+- 8774ef6: fix(inspector): enhance MCPAppsRenderer and OpenAIComponentRenderer with loading states and spinner
+  - Updated MCPAppsRenderer to include a loading spinner during widget initialization, improving user feedback.
+  - Introduced a new `isReady` state to manage the loading state effectively.
+  - Enhanced OpenAIComponentRenderer to adjust display properties based on the new configuration for better responsiveness.
+  - Added a maximum width for the Picture-in-Picture mode in MCP_APPS_CONFIG for improved layout control.
+  - Refactored iframe loading handling to ensure proper state management and user experience during loading phases.
+
+- Updated dependencies [8774ef6]
+  - mcp-use@1.19.0-canary.6
+
+## 0.20.0-canary.5
+
+### Patch Changes
+
+- Updated dependencies [5823280]
+  - mcp-use@1.19.0-canary.5
+
+## 0.20.0-canary.4
+
+### Patch Changes
+
+- Updated dependencies [21b3c0b]
+  - mcp-use@1.19.0-canary.4
+
+## 0.20.0-canary.3
+
+### Minor Changes
+
+- aa81040: feat(inspector): add quick questions and followups support to ChatTab
+  - Added support for `chatQuickQuestions` and `chatFollowups` props in `ChatTab`, `ChatLandingForm`, and `ChatInputArea` components to improve user interaction
+  - Implemented functionality to handle quick question and followup selection, enhancing the chat experience
+  - Updated `InspectorContext` to include new configuration options for quick questions and followups
+  - Enhanced message handling and event posting for better integration with the chat system
+
+### Patch Changes
+
+- aa81040: feat(inspector): enhance error handling and logging for widget components
+  - Implemented error logging functionality in MCPAppsRenderer and OpenAIComponentRenderer to capture and post error messages and stack traces to the parent window
+  - Added global error and unhandled promise rejection listeners in shared-utils to emit runtime errors with detailed context
+  - Enhanced console error handling in mcp-apps route to serialize and send console errors to the parent window, improving debugging capabilities
+  - Refactored MCPAppsRenderer to replace `isReady` state with `initCount` for better tracking of initialization events
+
+- dea387a: fix(csp): allow permissive frame ancestors by default
+- aa81040: feat(inspector): improve loading state and UI feedback in OpenAIComponentRenderer
+  - Replaced shimmer animation with a Spinner component for a more consistent loading experience
+  - Introduced a skeleton loading state that only displays on the initial load of the widget
+  - Updated ToolResultDisplay to adjust the order of view checks for better clarity
+  - Enhanced ToolsList to conditionally display parameter counts based on tool input schemas
+
+- aa81040: feat(inspector): enhance ToolsList with metadata display and tool type icons
+  - Updated ListItem component to conditionally render metadata
+  - Enhanced ToolsList to include tool metadata with icons for MCP and OpenAI, utilizing tool detection logic
+  - Introduced McpIcon and OpenAIIcon components for better visual representation of tool types
+
+- aa81040: feat(inspector): add log copying functionality and enhance theme handling
+  - Implemented a new feature in IframeConsole to copy all logs to the clipboard, providing users with an easy way to access console logs
+  - Enhanced OpenAIComponentRenderer to manage widget readiness state and apply theme changes dynamically, improving user experience and visual consistency
+  - Updated ThemeProvider to synchronize theme application with Tailwind dark mode and OpenAI Apps SDK design tokens, ensuring a seamless theme transition
+  - Added a message signaling to the parent window when the widget is ready, enhancing communication between components
+
+- Updated dependencies [aa81040]
+- Updated dependencies [aa81040]
+- Updated dependencies [aa81040]
+- Updated dependencies [aa81040]
+  - mcp-use@1.19.0-canary.3
+
+## 0.19.1-canary.2
+
+### Patch Changes
+
+- Updated dependencies [e8383a7]
+- Updated dependencies [1a8a2a6]
+  - mcp-use@1.19.0-canary.2
+
+## 0.19.1-canary.1
+
+### Patch Changes
+
+- 8e3cfb8: fix: use correct MIME type for mcp_apps resource counting and disable telemetry in local test runs
+- Updated dependencies [8e3cfb8]
+  - mcp-use@1.19.0-canary.1
+
+## 0.19.1-canary.0
+
+### Patch Changes
+
+- Updated dependencies [df8d269]
+  - mcp-use@1.19.0-canary.0
+
 ## 0.19.0
 
 ### Minor Changes
