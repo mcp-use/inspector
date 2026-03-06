@@ -1,5 +1,53 @@
 # @mcp-use/inspector
 
+## 0.24.1-canary.6
+
+### Patch Changes
+
+- 3cae276: Refactor clipboard operations across components to use a centralized `copyToClipboard` utility
+  - mcp-use@1.21.1-canary.6
+
+## 0.24.1-canary.5
+
+### Patch Changes
+
+- Updated dependencies [fb91a61]
+  - mcp-use@1.21.1-canary.5
+
+## 0.24.1-canary.4
+
+### Patch Changes
+
+- Updated dependencies [bdeaadb]
+  - mcp-use@1.21.1-canary.4
+
+## 0.24.1-canary.3
+
+### Patch Changes
+
+- mcp-use@1.21.1-canary.3
+
+## 0.24.1-canary.2
+
+### Patch Changes
+
+- mcp-use@1.21.1-canary.2
+
+## 0.24.1-canary.1
+
+### Patch Changes
+
+- 3e3767e: fix(inspector): allow set initial messages for exported chat components
+  - mcp-use@1.21.1-canary.1
+
+## 0.24.1-canary.0
+
+### Patch Changes
+
+- f0a872a: fix(inspector): strip infra headers from proxied requests
+- ef8a0cf: Fix tools selection and attachment button icons invisible in dark mode. Add explicit `text-muted-foreground` and `hover:text-foreground` to the paperclip and wrench buttons so they have proper contrast against the dark input background.
+  - mcp-use@1.21.1-canary.0
+
 ## 0.24.0
 
 ### Minor Changes
