@@ -1,7 +1,7 @@
 {
   "name": "@mcp-use/inspector",
   "type": "module",
-  "version": "0.24.5-canary.2",
+  "version": "0.24.5",
   "description": "MCP Inspector - A tool for inspecting and debugging MCP servers",
   "author": "",
   "license": "MIT",
@@ -65,6 +65,7 @@
     "test:e2e:codegen": "playwright codegen http://localhost:3000/inspector",
     "test:e2e:report": "playwright show-report",
     "test:e2e:python": "node tests/e2e/scripts/run-python-e2e.mjs",
+    "test:e2e:tunnel": "node tests/e2e/scripts/run-tunnel-test.mjs",
     "install:yarn": "yarn install",
     "install:pnpm": "pnpm install",
     "install:npm": "npm install",
