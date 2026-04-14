@@ -1,5 +1,22 @@
 # @mcp-use/inspector
 
+## 2.0.0-canary.3
+
+### Patch Changes
+
+- c51a656: feat(inspector): persist tabs on refresh
+- Updated dependencies [c51a656]
+- Updated dependencies [c51a656]
+  - mcp-use@1.24.0-canary.3
+
+## 2.0.0-canary.2
+
+### Patch Changes
+
+- b0e2492: Fix thinking indicator persisting after assistant stream completes
+- Updated dependencies [9478920]
+  - mcp-use@1.24.0-canary.2
+
 ## 2.0.0-canary.1
 
 ### Patch Changes
