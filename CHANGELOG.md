@@ -1,5 +1,26 @@
 # @mcp-use/inspector
 
+## 7.0.0-canary.15
+
+### Patch Changes
+
+- Updated dependencies [ecdb0fd]
+  - mcp-use@1.29.0-canary.15
+
+## 7.0.0-canary.14
+
+### Patch Changes
+
+- Updated dependencies [803fa89]
+  - mcp-use@1.29.0-canary.14
+
+## 7.0.0-canary.13
+
+### Patch Changes
+
+- 6a95b2c: Improve tab switch animation timing for snappier UI
+  - mcp-use@1.29.0-canary.13
+
 ## 7.0.0-canary.12
 
 ### Patch Changes
