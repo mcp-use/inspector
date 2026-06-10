@@ -1,5 +1,88 @@
 # @mcp-use/inspector
 
+## 8.0.1-canary.0
+
+### Patch Changes
+
+- mcp-use@1.30.1-canary.0
+
+## 8.0.0
+
+### Patch Changes
+
+- Updated dependencies [25ae46e]
+- Updated dependencies [25ae46e]
+- Updated dependencies [25ae46e]
+- Updated dependencies [25ae46e]
+- Updated dependencies [25ae46e]
+  - mcp-use@1.30.0
+
+## 8.0.0-canary.6
+
+### Patch Changes
+
+- mcp-use@1.30.0-canary.6
+
+## 8.0.0-canary.5
+
+### Patch Changes
+
+- Updated dependencies [e4b83e4]
+  - mcp-use@1.30.0-canary.5
+
+## 8.0.0-canary.4
+
+### Patch Changes
+
+- Updated dependencies [f8ca6bb]
+  - mcp-use@1.30.0-canary.4
+
+## 8.0.0-canary.3
+
+### Patch Changes
+
+- mcp-use@1.30.0-canary.3
+
+## 8.0.0-canary.2
+
+### Patch Changes
+
+- Updated dependencies [b820e74]
+  - mcp-use@1.30.0-canary.2
+
+## 8.0.0-canary.1
+
+### Patch Changes
+
+- Updated dependencies [88180d5]
+  - mcp-use@1.30.0-canary.1
+
+## 8.0.0-canary.0
+
+### Patch Changes
+
+- Updated dependencies [f565f9c]
+  - mcp-use@1.30.0-canary.0
+
+## 7.0.1
+
+### Patch Changes
+
+- feb8f09: Updated dependency `vitest` to `^4.1.0`.
+- Updated dependencies [feb8f09]
+- Updated dependencies [feb8f09]
+- Updated dependencies [feb8f09]
+- Updated dependencies [feb8f09]
+  - mcp-use@1.29.1
+
+## 7.0.1-canary.2
+
+### Patch Changes
+
+- 2ab15c6: Updated dependency `vitest` to `^4.1.0`.
+- Updated dependencies [2ab15c6]
+  - mcp-use@1.29.1-canary.2
+
 ## 7.0.1-canary.1
 
 ### Patch Changes
