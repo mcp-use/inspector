@@ -1,5 +1,46 @@
 # @mcp-use/inspector
 
+## 8.0.3-canary.0
+
+### Patch Changes
+
+- Updated dependencies [fd4efb7]
+  - mcp-use@1.30.3-canary.0
+
+## 8.0.2
+
+### Patch Changes
+
+- Updated dependencies [252d034]
+  - mcp-use@1.30.2
+
+## 8.0.2-canary.0
+
+### Patch Changes
+
+- Updated dependencies [f9fb29b]
+  - mcp-use@1.30.2-canary.0
+
+## 8.0.1
+
+### Patch Changes
+
+- c866bda: fix(inspector): stop widget status labels from blocking iframe pointer events
+
+  The MCP Apps preview pane rendered the invoking/invoked status label in an
+  absolutely positioned wrapper with `h-full`, which intercepted hover, click,
+  and form control interactions in a vertical strip along the left edge of the
+  widget iframe for the entire lifetime of the panel.
+
+  Apply `pointer-events-none`, drop the full-height wrapper, and align the Apps
+  SDK status label with the same non-blocking behavior.
+
+  Closes #1678
+
+- Updated dependencies [c866bda]
+- Updated dependencies [c866bda]
+  - mcp-use@1.30.1
+
 ## 8.0.1-canary.3
 
 ### Patch Changes
