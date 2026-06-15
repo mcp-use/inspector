@@ -8,7 +8,8 @@
 export function isLocalhostServerUrl(serverUrl: string): boolean {
   try {
     const u = new URL(serverUrl);
-    // URL.hostname keeps brackets around IPv6 literals (e.g. "[::1]").
+    // Strip any surrounding brackets so a bracketed IPv6 literal (e.g. "[::1]")
+    // compares equal to the bare "::1" form below.
     const h = u.hostname.toLowerCase().replace(/^\[|\]$/g, "");
     return (
       h === "localhost" || h === "127.0.0.1" || h === "::1" || h === "0.0.0.0"
@@ -17,5 +18,4 @@ export function isLocalhostServerUrl(serverUrl: string): boolean {
     return false;
   }
 }
-</content>
-</invoke>
+

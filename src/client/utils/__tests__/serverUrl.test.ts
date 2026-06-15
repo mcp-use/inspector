@@ -20,4 +20,4 @@ describe("isLocalhostServerUrl", () => {
     expect(isLocalhostServerUrl("")).toBe(false);
   });
 });
-</content>
+
