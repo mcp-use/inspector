@@ -1,5 +1,66 @@
 # @mcp-use/inspector
 
+## 10.0.1-canary.2
+
+### Patch Changes
+
+- Updated dependencies [8d626cb]
+  - mcp-use@1.32.1-canary.2
+
+## 10.0.1-canary.1
+
+### Patch Changes
+
+- Updated dependencies [a3f3b65]
+  - mcp-use@1.32.1-canary.1
+
+## 10.0.1-canary.0
+
+### Patch Changes
+
+- mcp-use@1.32.1-canary.0
+
+## 10.0.0
+
+### Patch Changes
+
+- Updated dependencies [5b4afc8]
+  - mcp-use@1.32.0
+
+## 10.0.0-canary.0
+
+### Patch Changes
+
+- Updated dependencies [a683d43]
+  - mcp-use@1.32.0-canary.0
+
+## 9.0.1
+
+### Patch Changes
+
+- mcp-use@1.31.1
+
+## 9.0.1-canary.0
+
+### Patch Changes
+
+- mcp-use@1.31.1-canary.0
+
+## 9.0.0
+
+### Patch Changes
+
+- Updated dependencies [4d00a1f]
+- Updated dependencies [4d00a1f]
+  - mcp-use@1.31.0
+
+## 9.0.0-canary.1
+
+### Patch Changes
+
+- Updated dependencies [4e34b82]
+  - mcp-use@1.31.0-canary.1
+
 ## 8.0.3-canary.0
 
 ### Patch Changes
