@@ -1,5 +1,68 @@
 # @mcp-use/inspector
 
+## 10.0.2-canary.1
+
+### Patch Changes
+
+- mcp-use@1.32.2-canary.1
+
+## 10.0.2-canary.0
+
+### Patch Changes
+
+- Updated dependencies [c242a0c]
+  - mcp-use@1.32.2-canary.0
+
+## 10.0.1
+
+### Patch Changes
+
+- efa7fe7: Fix chat for localhost MCP servers in the hosted inspector (MCP-2419). When the inspector runs in hosted mode the Chat tab streams through the managed cloud backend, which connects to the MCP server from the server side and cannot reach a user's `localhost` server — the request returns a 502 that surfaces in the browser as an opaque CORS / "Failed to fetch" error. Loopback server URLs now fall back to client-side (in-browser) chat streaming, and the configure-key empty state explains why the managed key is unavailable and that a personal API key is needed. The notice only appears in hosted mode; the local inspector is unchanged.
+- efa7fe7: Add a centered, animated scroll-to-bottom button to the Inspector chat when viewing older messages.
+- Updated dependencies [efa7fe7]
+- Updated dependencies [efa7fe7]
+- Updated dependencies [efa7fe7]
+- Updated dependencies [efa7fe7]
+- Updated dependencies [efa7fe7]
+  - mcp-use@1.32.1
+
+## 10.0.1-canary.14
+
+### Patch Changes
+
+- mcp-use@1.32.1-canary.14
+
+## 10.0.1-canary.13
+
+### Patch Changes
+
+- mcp-use@1.32.1-canary.13
+
+## 10.0.1-canary.12
+
+### Patch Changes
+
+- Updated dependencies [c9e1696]
+  - mcp-use@1.32.1-canary.12
+
+## 10.0.1-canary.11
+
+### Patch Changes
+
+- mcp-use@1.32.1-canary.11
+
+## 10.0.1-canary.10
+
+### Patch Changes
+
+- mcp-use@1.32.1-canary.10
+
+## 10.0.1-canary.9
+
+### Patch Changes
+
+- mcp-use@1.32.1-canary.9
+
 ## 10.0.1-canary.8
 
 ### Patch Changes
