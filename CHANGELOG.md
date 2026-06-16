@@ -1,5 +1,18 @@
 # @mcp-use/inspector
 
+## 10.0.1-canary.8
+
+### Patch Changes
+
+- mcp-use@1.32.1-canary.8
+
+## 10.0.1-canary.7
+
+### Patch Changes
+
+- 1fb87d2: Add a centered, animated scroll-to-bottom button to the Inspector chat when viewing older messages.
+  - mcp-use@1.32.1-canary.7
+
 ## 10.0.1-canary.6
 
 ### Patch Changes
