@@ -154,7 +154,7 @@ export function InspectorDashboard() {
       url: string,
       name?: string,
       proxyConfig?: any,
-      transportType?: "http",
+      transportType?: "http" | "sse",
       oauth?: OAuthStaticConfig,
       connectionMode: ConnectionMode = proxyConfig?.proxyAddress
         ? "proxy"
@@ -191,7 +191,7 @@ export function InspectorDashboard() {
           headers?: Record<string, string>;
         };
         connectionMode?: ConnectionMode;
-        transportType?: "http";
+        transportType?: "http" | "sse";
         oauth?: OAuthStaticConfig;
         autoProxyFallback?:
           | boolean

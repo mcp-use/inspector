@@ -1,9 +1,9 @@
-import type { Transport } from "@modelcontextprotocol/server";
+import type { Transport } from "@modelcontextprotocol/sdk/shared/transport.js";
 import type {
   JSONRPCMessage,
   MessageExtraInfo,
-} from "@modelcontextprotocol/server";
-import type { TransportSendOptions } from "@modelcontextprotocol/server";
+} from "@modelcontextprotocol/sdk/types.js";
+import type { TransportSendOptions } from "@modelcontextprotocol/sdk/shared/transport.js";
 import { rpcLogBus } from "./rpc-log-bus.js";
 
 /**

@@ -1,7 +1,7 @@
 import type {
   ElicitRequestFormParams,
   ElicitRequestURLParams,
-} from "@modelcontextprotocol/client";
+} from "@modelcontextprotocol/sdk/types.js";
 
 export interface PendingElicitationRequest {
   id: string;

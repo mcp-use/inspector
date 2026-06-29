@@ -1,4 +1,8 @@
-import type { Prompt, Resource, Tool } from "@modelcontextprotocol/client";
+import type {
+  Prompt,
+  Resource,
+  Tool,
+} from "@modelcontextprotocol/sdk/types.js";
 import { Command } from "cmdk";
 import {
   BrushCleaning,

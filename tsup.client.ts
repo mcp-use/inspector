@@ -14,8 +14,7 @@ export default defineConfig({
     "react-dom",
     "lucide-react",
     "mcp-use/react",
-    "@modelcontextprotocol/client",
-    "@modelcontextprotocol/server",
+    "@modelcontextprotocol/sdk",
     "sonner",
     "e2b",
     "@e2b/code-interpreter",
@@ -32,7 +31,10 @@ export default defineConfig({
   // so we use a regex that matches mcp-use but excludes the /react subpath.
   // noExternal overrides external — the stdio sub-path is matched here so the
   // alias can redirect it to a browser stub instead of emitting a bare import.
-  noExternal: [/^mcp-use(?!\/react)/, /^@modelcontextprotocol\/client\/stdio/],
+  noExternal: [
+    /^mcp-use(?!\/react)/,
+    /^@modelcontextprotocol\/sdk\/client\/stdio/,
+  ],
   esbuildOptions(options) {
     options.alias = {
       // --- Node.js built-in modules (from mcp-use's bundled MCPClient code) ---
@@ -54,11 +56,11 @@ export default defineConfig({
       "posthog-node": path.join(stubDir, "posthog-node.js"),
 
       // Node.js-only SDK transport — stubbed so consumers don't need cross-spawn/fs
-      "@modelcontextprotocol/client/stdio": path.join(
+      "@modelcontextprotocol/sdk/client/stdio.js": path.join(
         stubDir,
         "stdio-transport.js"
       ),
-      "@modelcontextprotocol/client/stdio.js": path.join(
+      "@modelcontextprotocol/sdk/client/stdio": path.join(
         stubDir,
         "stdio-transport.js"
       ),

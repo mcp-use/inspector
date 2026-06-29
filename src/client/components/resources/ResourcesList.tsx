@@ -1,4 +1,4 @@
-import type { Resource } from "@modelcontextprotocol/client";
+import type { Resource } from "@modelcontextprotocol/sdk/types.js";
 import {
   Database,
   File,

@@ -140,7 +140,7 @@ export function ConnectionSettingsForm({
         connectionMode === "proxy" && proxyAddress.trim()
           ? {
               proxyAddress: proxyAddress.trim(),
-              headers: customHeaders.reduce(
+              customHeaders: customHeaders.reduce(
                 (acc, header) => {
                   if (header.name && header.value) {
                     acc[header.name] = header.value;
@@ -158,7 +158,7 @@ export function ConnectionSettingsForm({
               proxyAddress: proxyAddress.trim(),
             }
           : undefined,
-      headers: customHeaders.reduce(
+      customHeaders: customHeaders.reduce(
         (acc, header) => {
           if (header.name && header.value) {
             acc[header.name] = header.value;

@@ -1,5 +1,8 @@
 import { useState, useCallback, useEffect, useMemo } from "react";
-import type { Prompt, GetPromptResult } from "@modelcontextprotocol/client";
+import type {
+  Prompt,
+  GetPromptResult,
+} from "@modelcontextprotocol/sdk/types.js";
 import { MCPPromptCallEvent, Telemetry } from "@/client/telemetry";
 
 export interface PromptResult {

@@ -24,7 +24,7 @@ interface UseAutoConnectOptions {
       proxyAddress?: string;
       customHeaders?: Record<string, string>;
     },
-    transportType?: "http",
+    transportType?: "http" | "sse",
     oauth?: OAuthStaticConfig,
     connectionMode?: ConnectionMode,
     autoProxyFallback?:
@@ -47,7 +47,7 @@ interface AutoConnectState {
 interface ConnectionConfig {
   url: string;
   name: string;
-  transportType: "http";
+  transportType: "http" | "sse";
   connectionMode: ConnectionMode;
   connectionType?: "Direct" | "Via Proxy";
   autoProxyFallback?:
@@ -73,7 +73,7 @@ export function shouldReplaceAutoConnectConnection(
   existing: {
     url?: string;
     state?: string;
-    transportType?: "http";
+    transportType?: "http" | "sse";
   },
   config: Pick<ConnectionConfig, "url" | "transportType">
 ): boolean {
@@ -195,7 +195,7 @@ function parseAutoConnectParam(param: string): ConnectionConfig | null {
         return {
           url: url,
           name: parsed.name || "Auto-connected Server",
-          transportType: "http",
+          transportType: parsed.transportType === "sse" ? "sse" : "http",
           connectionMode: normalizeConnectionMode(
             parsed.connectionMode,
             parsed.connectionType,

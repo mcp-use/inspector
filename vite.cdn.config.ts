@@ -61,11 +61,11 @@ export default defineConfig({
       "node:process": path.resolve(stubDir, "process.js"),
       "node:child_process": path.resolve(stubDir, "child_process.js"),
       child_process: path.resolve(stubDir, "child_process.js"),
-      "@modelcontextprotocol/client/stdio.js": path.resolve(
+      "@modelcontextprotocol/sdk/client/stdio.js": path.resolve(
         stubDir,
         "stdio-transport.js"
       ),
-      "@modelcontextprotocol/client/stdio": path.resolve(
+      "@modelcontextprotocol/sdk/client/stdio": path.resolve(
         stubDir,
         "stdio-transport.js"
       ),
