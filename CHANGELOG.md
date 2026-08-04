@@ -1,5 +1,27 @@
 # @mcp-use/inspector
 
+## 20.0.1-canary.3
+
+### Patch Changes
+
+- Updated dependencies [4ea75fd]
+  - @mcp-use/client@2.0.1-canary.0
+  - @mcp-use/agent@2.0.1-canary.0
+  - mcp-use@2.0.1-canary.3
+
+## 20.0.1-canary.2
+
+### Patch Changes
+
+- mcp-use@2.0.1-canary.2
+
+## 20.0.1-canary.1
+
+### Patch Changes
+
+- Updated dependencies [f1ed431]
+  - mcp-use@2.0.1-canary.1
+
 ## 20.0.1-canary.0
 
 ### Patch Changes
