@@ -1,5 +1,12 @@
 # @mcp-use/inspector
 
+## 21.0.0-canary.10
+
+### Patch Changes
+
+- e41076f: Improve Skills over MCP discovery in Inspector and omit invalid skills from fresh development snapshots.
+  - mcp-use@3.0.0-canary.10
+
 ## 21.0.0-canary.9
 
 ### Patch Changes
@@ -310,7 +317,7 @@
 - fe4d3b2: Enable MCP view JS code splitting and polish inspector boot UX.
 
   **mcp-use**
-  - Enable rolldown code splitting for per-view client builds (`chunkFileNames` alongside the entry chunk); update `VIEWS_SPEC.md` for external assets and split chunks.
+  - Enable rolldown code splitting for per-view client builds (`chunkFileNames` alongside the entry chunk) for external assets and split chunks.
   - Paint a centered boot spinner in the managed inspector shell while the CDN bundle downloads.
 
   **@mcp-use/inspector**
@@ -830,7 +837,7 @@
 - fe4d3b2: Enable MCP view JS code splitting and polish inspector boot UX.
 
   **mcp-use**
-  - Enable rolldown code splitting for per-view client builds (`chunkFileNames` alongside the entry chunk); update `VIEWS_SPEC.md` for external assets and split chunks.
+  - Enable rolldown code splitting for per-view client builds (`chunkFileNames` alongside the entry chunk) for external assets and split chunks.
   - Paint a centered boot spinner in the managed inspector shell while the CDN bundle downloads.
 
   **@mcp-use/inspector**
