@@ -1,5 +1,24 @@
 # @mcp-use/inspector
 
+## 20.3.1-canary.0
+
+### Patch Changes
+
+- @mcp-use/agent@2.0.9-canary.0
+- mcp-use@2.3.2-canary.0
+
+## 20.3.0
+
+### Minor Changes
+
+- 99f76cc: Export the connection settings form, state hook, and public configuration types from `@mcp-use/inspector/client`, including optional consumer URL validation.
+
+## 20.3.0-canary.0
+
+### Minor Changes
+
+- 419c8e4: Export the connection settings form, state hook, and public configuration types from `@mcp-use/inspector/client`, including optional consumer URL validation.
+
 ## 20.2.5
 
 ### Patch Changes
