@@ -1,7 +1,7 @@
 {
   "name": "@mcp-use/inspector",
   "type": "module",
-  "version": "20.3.9-canary.0",
+  "version": "20.3.9-canary.1",
   "description": "MCP Inspector - A tool for inspecting and debugging MCP servers",
   "author": "",
   "license": "MIT",
@@ -165,7 +165,7 @@
     "emulate": "0.5.0",
     "eslint": "^9.39.2",
     "express": "^5.2.1",
-    "hono": "^4.12.34",
+    "hono": "^4.13.5",
     "jsdom": "^27.0.0",
     "lucide-react": "^0.562.0",
     "markdown-to-jsx": "^9.7.4",
