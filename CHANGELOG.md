@@ -1,5 +1,97 @@
 # @mcp-use/inspector
 
+## 20.3.13
+
+### Patch Changes
+
+- 7d71ef7: Rebuild bundled workspace code and synchronize published internal package metadata.
+- 7d71ef7: Rebuild bundled workspace code and synchronize published internal package metadata.
+- 7d71ef7: Rebuild bundled workspace code and synchronize published internal package metadata.
+- 7d71ef7: Rebuild bundled workspace code and synchronize published internal package metadata.
+- Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 20.3.13-canary.3
+
+### Patch Changes
+
+- Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 20.3.13-canary.2
+
+### Patch Changes
+
+- Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 20.3.13-canary.1
+
+### Patch Changes
+
+- Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 20.3.13-canary.0
+
+### Patch Changes
+
+- Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 20.3.12
+
+### Patch Changes
+
+- 3640505: Rebuild bundled workspace code and synchronize published internal package metadata.
+- 3640505: Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 20.3.12-canary.1
+
+### Patch Changes
+
+- Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 20.3.12-canary.0
+
+### Patch Changes
+
+- Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 20.3.11
+
+### Patch Changes
+
+- 4866186: Fix two Inspector crashes and resets: searchable pickers (debugger timezone and locale) no longer unmount the app when the checked option is filtered out while typing, and Connection Settings keeps edits while a failed connection retries instead of resetting the form on every retry.
+- 4866186: Rebuild bundled workspace code and synchronize published internal package metadata.
+- 4866186: Rebuild bundled workspace code and synchronize published internal package metadata.
+- 4866186: Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 20.3.11-canary.2
+
+### Patch Changes
+
+- Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 20.3.11-canary.1
+
+### Patch Changes
+
+- Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 20.3.11-canary.0
+
+### Patch Changes
+
+- Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 20.3.10
+
+### Patch Changes
+
+- 46cc2cf: Fix tall MCP Apps overflowing the tool result view by allowing the result content to grow and scroll without clipping the top of the app behind the response toolbar.
+
+## 20.3.10-canary.0
+
+### Patch Changes
+
+- 8f7b6ac: Fix tall MCP Apps overflowing the tool result view by allowing the result content to grow and scroll without clipping the top of the app behind the response toolbar.
+
 ## 20.3.9
 
 ### Patch Changes
