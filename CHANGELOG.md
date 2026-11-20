@@ -1,5 +1,58 @@
 # @mcp-use/inspector
 
+## 20.3.33
+
+### Patch Changes
+
+- 9663941: Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 20.3.33-canary.0
+
+### Patch Changes
+
+- Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 20.3.32
+
+### Patch Changes
+
+- 343a803: Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 20.3.32-canary.0
+
+### Patch Changes
+
+- Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 20.3.31
+
+### Patch Changes
+
+- 33279c8: Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 20.3.31-canary.0
+
+### Patch Changes
+
+- Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 20.3.30
+
+### Patch Changes
+
+- 4b2e49e: Update Playwright to 1.65.1 so Inspector E2E browser installation supports Ubuntu 26.04 runners.
+- 4b2e49e: The Inspector now renders MCP Apps views from tools that only send the deprecated flat `_meta["ui/resourceUri"]` key: chat results, tool execution resource prefetch and MCP Apps capability detection read the same URI as `getViewResourceUri()`.
+- 4b2e49e: Rebuild bundled workspace code and synchronize published internal package metadata.
+- 4b2e49e: Rebuild bundled workspace code and synchronize published internal package metadata.
+- 4b2e49e: Rebuild bundled workspace code and synchronize published internal package metadata.
+- 4b2e49e: Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 20.3.30-canary.5
+
+### Patch Changes
+
+- 136c9e3: Update Playwright to 1.65.1 so Inspector E2E browser installation supports Ubuntu 26.04 runners.
+
 ## 20.3.30-canary.4
 
 ### Patch Changes
